@@ -1,10 +1,14 @@
 package com.clinica.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.clinica.model.Usuario;
 
 @Repository
-public interface IUsuarioRepository extends JpaRepository<Usuario,String>{
+public interface IUsuarioRepository extends JpaRepository<Usuario, String> {
+
+	Optional<Usuario> findByUsername(String username);
 
 }

@@ -1,38 +1,45 @@
 package com.clinica.service;
 
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 import com.clinica.model.Usuario;
 import com.clinica.repository.IUsuarioRepository;
 
-@Service
-public class UsuarioService implements IUsuarioService {
+//@Service
+public class UsuarioService {
 
-	@Autowired
+	//@Autowired
 	private IUsuarioRepository usuarioRepository;
 	
 	BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16);
 	
-	@Override
+	
 	public Usuario obtenerUsuario(String id) {	
 		return usuarioRepository.getOne(id);
 	}
 
-	@Override
+	
 	public List<Usuario> listarUsuarios() {
 		return usuarioRepository.findAll();
 	}
 
-	@Override
+	
 	public Usuario guardarUsuario(Usuario u) {
-		//Encriptando la contraseña
+		/*
+		 * if(usuarioRepository.existsbyUsername(u.getUsername())){ return
+		 * ResponseEntity .badRequest().body("Error: Username is already taken!"); }
+		 */
+		// Encriptando la contraseña
 		String encodedPassword = encoder.encode(u.getPassword());
-		//Seteando la contraseña
+
+		// Seteando la contraseña
 		u.setPassword(encodedPassword);
-		//Obtener el usuario guardado
+
+		// Obtener el usuario guardado
 		Usuario user = usuarioRepository.save(u);
+
 		return user;
 	}
 	

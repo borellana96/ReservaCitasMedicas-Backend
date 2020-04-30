@@ -12,6 +12,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.clinica.service.UserDetailsServiceImpl;
 
 @Configuration
@@ -52,5 +54,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         .anyRequest().authenticated();				//cualquier otra peticion requiere autenticacion 
 		
     }
+	
+	/*
+	 * En la clase CorsRegistration que se encuenta dentro de CorsRegistry, 
+	 * sus métodos retornan el mismo objeto, así que se puede seguir llamando 
+	 * a más metodos de esa clase(CorsRegistration) y así seguir añadiendo más
+	 * configuraciones al CORS. Algunos de estos métodos: allowedHeaders,
+	 * allowedMethods, allowedOrigins, maxAge, etc.
+	 */
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200")
+				.allowedMethods("GET", "POST");
+			}
+		};
+	}
 	
 }

@@ -2,11 +2,11 @@ package com.clinica.util;
 
 public class JwtResponse {
 	private String username;
-	private String accesToken;
-	private String tokeType = "Bearer";
+	private String accessToken;
+	private String tokenType = "Bearer";
 
 	public JwtResponse(String accessToken, String username) {
-		this.accesToken = accessToken;
+		this.accessToken = accessToken;
 		this.username = username;
 	}
 
@@ -18,17 +18,17 @@ public class JwtResponse {
 	}
 
 	public String getAccesToken() {
-		return accesToken;
+		return accessToken;
 	}
 	public void setAccesToken(String accesToken) {
-		this.accesToken = accesToken;
+		this.accessToken = accesToken;
 	}
 
 	public String getTokeType() {
-		return tokeType;
+		return tokenType;
 	}
 	public void setTokeType(String tokeType) {
-		this.tokeType = tokeType;
+		this.tokenType = tokeType;
 	}
 	
 }
